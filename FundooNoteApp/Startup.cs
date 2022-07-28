@@ -33,22 +33,43 @@ namespace FundooNoteApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddSwaggerGen();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Implement Swagger UI",
-                    Description = "A simple example to Implement Swagger UI",
-                });
-            });
-
-
             services.AddDbContext<FundooContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:FundooDB"]));
             services.AddControllers();
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<IUserRL, UserRL>();
+
+            services.AddSwaggerGen();
+            services.AddSwaggerGen(opt =>
+            {
+            
+                opt.SwaggerDoc("v1", new OpenApiInfo { Title = "Fundoo Notes App", Version = "v1", Description = "This is Fundoo notes app 3-tier architecture asp.net core web api project using Entity Framework - code first approach. " });
+                opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                });
+                opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type=ReferenceType.SecurityScheme,
+                            Id="Bearer"
+                        }
+                    },
+                    new string[]{}
+                }
+                });
+            });
+        
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
