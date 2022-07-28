@@ -1,0 +1,15 @@
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.deps.json
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.dll
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\RepositoryLayer.pdb
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.csproj.AssemblyReference.cache
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.AssemblyInfo.cs
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.csproj.CopyComplete
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\tusha\source\repos\FundooNoteApp\BusinessLayer\obj\Debug\netcoreapp3.1\BusinessLayer.pdb
