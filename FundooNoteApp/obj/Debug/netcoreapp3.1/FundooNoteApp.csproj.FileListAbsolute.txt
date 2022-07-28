@@ -49,3 +49,8 @@ C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\obj\Debug\netcoreapp3.1\FundooNoteApp.MvcApplicationPartsAssemblyInfo.cs
