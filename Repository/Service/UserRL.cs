@@ -150,13 +150,7 @@ namespace RepositoryLayer.Service
                 else
                 {
                     return false;
-                }
-                
-
-                
-
-                
-                
+                }                
 
             }
             catch (Exception)
