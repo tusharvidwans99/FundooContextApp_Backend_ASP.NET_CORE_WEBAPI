@@ -38,6 +38,22 @@ namespace CommonLayer.Model
             string Token = msg.Body.ToString();
             string subject = "Fundoo Notes reset link";
             string Body = Token;
+
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("testmsmq@gmail.com");
+            mail.To.Add("testmsmq@gmail.com");
+            mail.Subject = subject;
+            mail.IsBodyHtml = true;
+
+            string htmlBody;
+
+            htmlBody = "<body><p>Dear User,<br>" +
+                        "Copy below token to reset your password.<br></body>" +
+                        Token;
+
+            mail.Body = htmlBody;
+
+
             var SMTP = new SmtpClient("smtp.gmail.com")
             {
 
@@ -47,7 +63,7 @@ namespace CommonLayer.Model
 
             };
 
-            SMTP.Send("testmsmq@gmail.com", "testmsmq@gmail.com", subject, Body);
+            SMTP.Send(mail);
 
             messageQueue.BeginReceive();
 
