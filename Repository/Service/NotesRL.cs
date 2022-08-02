@@ -207,6 +207,37 @@ namespace RepositoryLayer.Service
             }
         }
 
+
+        public NotesEntity Color(long NoteID, string color)
+        {
+            try
+            {
+
+                var result = fundooContext.NotesTable.First(x => x.noteID == NoteID);
+
+                if (result != null)
+                {
+                    result.Color = color;
+                    fundooContext.SaveChanges();
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+
+        }
+
     }
 
 }

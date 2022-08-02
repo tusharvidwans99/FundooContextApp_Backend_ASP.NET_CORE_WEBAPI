@@ -19,6 +19,7 @@ namespace BusinessLayer.Interface
         public bool PinToTop(long NoteID, long userId);
         public bool Archive(long NoteID, long userId);
         public bool Trash(long NoteID, long userId);
+        public NotesEntity Color(long NoteID, string color);
 
     }
 }
