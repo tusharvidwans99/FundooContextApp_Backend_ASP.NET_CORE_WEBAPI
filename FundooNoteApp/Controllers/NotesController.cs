@@ -135,7 +135,7 @@ namespace FundooNoteApp.Controllers
         {
             try
             {
-                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
                 var result = iNotesBL.PinToTop(NoteID, userID);
                 if (result == true)
                 {
@@ -161,7 +161,7 @@ namespace FundooNoteApp.Controllers
 
             try
             {
-                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
                 var result = iNotesBL.Archive(NoteID, userID);
 
                 if (result == true)
