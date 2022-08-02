@@ -128,6 +128,32 @@ namespace RepositoryLayer.Service
             }
         }
 
+
+        public bool PinToTop(long NoteID, long userId)
+        {
+            try
+            {
+                var result = fundooContext.NotesTable.Where(x => x.UserId == userId && x.noteID == NoteID).FirstOrDefault();
+
+                if (result.Pin == true)
+                {
+                    result.Pin = false;
+                    fundooContext.SaveChanges();
+                    return false;
+                }
+                else
+                {
+                    result.Pin = true;
+                    fundooContext.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 
 }

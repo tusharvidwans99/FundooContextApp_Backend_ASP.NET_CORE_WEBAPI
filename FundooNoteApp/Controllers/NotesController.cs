@@ -32,7 +32,7 @@ namespace FundooNoteApp.Controllers
             try
             {
 
-                long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                long UserId = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
 
                 var result = iNotesBL.AddNotes(notesCreateModel, UserId);
 
@@ -61,7 +61,7 @@ namespace FundooNoteApp.Controllers
         {
             try
             {
-                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
                 var result = iNotesBL.ReadNotes(userID);
                 if (result != null)
                 {
@@ -86,7 +86,7 @@ namespace FundooNoteApp.Controllers
         {
             try
             {
-                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
                 var result = iNotesBL.UpdateNote(noteModel, NoteID, userID);
                 if (result != null)
                 {
@@ -110,7 +110,7 @@ namespace FundooNoteApp.Controllers
         {
             try
             {
-                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
                 var result = iNotesBL.DeleteNotes(userID, NoteID);
                 if (result != false)
                 {
@@ -120,6 +120,32 @@ namespace FundooNoteApp.Controllers
                 {
                     return BadRequest(new { success = false, message = "Cannot delete note." });
                 }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        [HttpPut]
+        [Route("Pin")]
+        public IActionResult pinToDashboard(long NoteID)
+        {
+            try
+            {
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = iNotesBL.PinToTop(NoteID, userID);
+                if (result == true)
+                {
+                    return Ok(new { success = true, message = "Note Pinned Successfully" });
+                }
+                else if (result == false)
+                {
+                    return Ok(new { success = true, message = "Note Unpinned successfully." });
+                }
+                return BadRequest(new { success = false, message = "Operation Unsuccessful." });
             }
             catch (System.Exception)
             {

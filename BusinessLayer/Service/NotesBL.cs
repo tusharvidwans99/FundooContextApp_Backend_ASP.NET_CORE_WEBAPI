@@ -71,6 +71,18 @@ namespace BusinessLayer.Service
             }
         }
 
+        public bool PinToTop(long NoteID, long userId)
+        {
+            try
+            {
+                return iNotesRL.PinToTop(NoteID, userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 
