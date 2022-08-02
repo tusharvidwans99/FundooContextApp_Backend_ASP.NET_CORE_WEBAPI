@@ -25,7 +25,7 @@ namespace RepositoryLayer.Service
             try
             {
                 NotesEntity notesEntity = new NotesEntity();
-                var result = fundooContext.UserTable.FirstOrDefault(e => e.UserId == userId);
+                var result = fundooContext.UserTable.FirstOrDefault(x => x.UserId == userId);
 
 
                 if (result != null)
@@ -80,7 +80,7 @@ namespace RepositoryLayer.Service
         {
             try
             {
-                var result = fundooContext.NotesTable.Where(note => note.UserId == userId && note.noteID == NoteId).FirstOrDefault();
+                var result = fundooContext.NotesTable.Where(x => x.UserId == userId && x.noteID == NoteId).FirstOrDefault();
                 if (result != null)
                 {
                     result.Title = noteModel.Title;
@@ -146,6 +146,33 @@ namespace RepositoryLayer.Service
                     result.Pin = true;
                     fundooContext.SaveChanges();
                     return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        public bool Archive(long NoteID, long userId)
+        {
+            try
+            {
+                var result = fundooContext.NotesTable.Where(x => x.UserId == userId && x.noteID == NoteID).FirstOrDefault();
+
+                if (result.Archive == false)
+                {
+                    result.Archive = true;
+                    fundooContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    result.Archive = false;
+                    fundooContext.SaveChanges();
+                    return false;
                 }
             }
             catch (Exception)

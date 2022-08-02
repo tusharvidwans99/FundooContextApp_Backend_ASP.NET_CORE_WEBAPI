@@ -17,6 +17,7 @@ namespace BusinessLayer.Interface
 
         public bool DeleteNotes(long userId, long noteId);
         public bool PinToTop(long NoteID, long userId);
+        public bool Archive(long NoteID, long userId);
 
     }
 }
