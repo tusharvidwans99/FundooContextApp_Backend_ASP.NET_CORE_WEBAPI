@@ -18,7 +18,7 @@ namespace BusinessLayer.Service
             this.iNotesRL = iNotesRL;
         }
 
-        public NotesEntity AddNotes(NoteCreateModel notesCreateModel, long userId)
+        public NotesEntity AddNotes(NoteModel notesCreateModel, long userId)
         {
             try
             {
@@ -37,6 +37,19 @@ namespace BusinessLayer.Service
             try
             {
                 return iNotesRL.ReadNotes(userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public NotesEntity UpdateNote(NoteModel noteModel, long NoteId, long userId)
+        {
+            try
+            {
+                return iNotesRL.UpdateNote(noteModel, NoteId, userId);
             }
             catch (Exception)
             {

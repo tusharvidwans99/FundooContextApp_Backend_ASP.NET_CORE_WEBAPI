@@ -26,7 +26,7 @@ namespace FundooNoteApp.Controllers
         
         [HttpPost]
         [Route("Create")]
-        public IActionResult CreateNote(NoteCreateModel notesCreateModel)
+        public IActionResult CreateNote(NoteModel notesCreateModel)
         {
 
             try
@@ -70,6 +70,31 @@ namespace FundooNoteApp.Controllers
                 else
                 {
                     return BadRequest(new { success = false, message = "Cannot get notes." });
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        [HttpPut]
+        [Route("Update")]
+        public IActionResult UpdateNote(NoteModel noteModel, long NoteID)
+        {
+            try
+            {
+                long userID = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "userID").Value);
+                var result = iNotesBL.UpdateNote(noteModel, NoteID, userID);
+                if (result != null)
+                {
+                    return Ok(new { success = true, message = "Note Updated Successfully.", data = result });
+                }
+                else
+                {
+                    return BadRequest(new { success = false, message = "Cannot update note." });
                 }
             }
             catch (System.Exception)

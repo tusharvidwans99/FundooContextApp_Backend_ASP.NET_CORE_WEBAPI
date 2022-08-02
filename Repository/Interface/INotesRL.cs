@@ -9,8 +9,10 @@ namespace RepositoryLayer.Interface
     public interface INotesRL
     {
 
-        public NotesEntity AddNotes(NoteCreateModel notesCreateModel, long userId);
+        public NotesEntity AddNotes(NoteModel notesCreateModel, long userId);
 
         public IEnumerable<NotesEntity> ReadNotes(long userId);
+
+        public NotesEntity UpdateNote(NoteModel noteModel, long NoteId, long userId);
     }
 }

@@ -20,7 +20,7 @@ namespace RepositoryLayer.Service
         {
             this.fundooContext = fundooContext;
         }
-        public NotesEntity AddNotes(NoteCreateModel notesCreateModel, long userId)
+        public NotesEntity AddNotes(NoteModel notesCreateModel, long userId)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace RepositoryLayer.Service
                     notesEntity.Title = notesCreateModel.Title;
                     notesEntity.Description = notesCreateModel.Description;
                     notesEntity.Reminder = notesCreateModel.Reminder;
-                    notesEntity.Color = notesCreateModel.Colour;
+                    notesEntity.Color = notesCreateModel.Color;
                     notesEntity.Image = notesCreateModel.Image;
                     notesEntity.Archive = notesCreateModel.Archive;
                     notesEntity.Pin = notesCreateModel.Pin;
@@ -67,6 +67,36 @@ namespace RepositoryLayer.Service
             {
                 var result = this.fundooContext.NotesTable.Where(x => x.UserId == userId);
                 return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        public NotesEntity UpdateNote(NoteModel noteModel, long NoteId, long userId)
+        {
+            try
+            {
+                var result = fundooContext.NotesTable.Where(note => note.UserId == userId && note.noteID == NoteId).FirstOrDefault();
+                if (result != null)
+                {
+                    result.Title = noteModel.Title;
+                    result.Description = noteModel.Description;
+                    result.Reminder = noteModel.Reminder;
+                    result.Edited = DateTime.Now;
+                    result.Color = noteModel.Color;
+                    result.Image = noteModel.Image;
+
+                    this.fundooContext.SaveChanges();
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {
