@@ -31,7 +31,18 @@ namespace BusinessLayer.Service
             }
         }
 
-       
+
+        public IEnumerable<NotesEntity> ReadNotes(long userId)
+        {
+            try
+            {
+                return iNotesRL.ReadNotes(userId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }
