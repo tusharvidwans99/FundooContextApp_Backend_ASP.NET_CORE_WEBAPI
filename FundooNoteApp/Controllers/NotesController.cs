@@ -131,7 +131,7 @@ namespace FundooNoteApp.Controllers
 
         [HttpPut]
         [Route("Pin")]
-        public IActionResult pinToDashboard(long NoteID)
+        public IActionResult pinToTop(long NoteID)
         {
             try
             {
