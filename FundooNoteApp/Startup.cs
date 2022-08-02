@@ -41,6 +41,9 @@ namespace FundooNoteApp
             services.AddTransient<IUserBL, UserBL>();
             services.AddTransient<IUserRL, UserRL>();
 
+            services.AddTransient<INotesBL, NotesBL>();
+            services.AddTransient<INotesRL, NotesRL>();
+
             services.AddSwaggerGen();
             services.AddSwaggerGen(opt =>
             {
