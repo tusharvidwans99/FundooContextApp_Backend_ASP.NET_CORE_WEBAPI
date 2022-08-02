@@ -105,7 +105,7 @@ namespace FundooNoteApp.Controllers
 
 
         [HttpDelete]
-        [Route("DeleteNote")]
+        [Route("Delete")]
         public IActionResult DeleteNotes(long NoteID)
         {
             try
