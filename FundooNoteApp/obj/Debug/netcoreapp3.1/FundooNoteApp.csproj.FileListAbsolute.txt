@@ -59,3 +59,4 @@ C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll

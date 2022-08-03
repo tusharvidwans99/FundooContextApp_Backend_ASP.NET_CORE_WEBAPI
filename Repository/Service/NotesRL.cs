@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
 
 namespace RepositoryLayer.Service
 {
@@ -15,10 +18,12 @@ namespace RepositoryLayer.Service
     {
 
         private readonly FundooContext fundooContext;
+        private readonly IConfiguration cloudinaryEntity;
 
-        public NotesRL(FundooContext fundooContext)
+        public NotesRL(FundooContext fundooContext, IConfiguration cloudinaryEntity)
         {
             this.fundooContext = fundooContext;
+            this.cloudinaryEntity = cloudinaryEntity;
         }
         public NotesEntity AddNotes(NoteModel notesCreateModel, long userId)
         {
@@ -233,10 +238,44 @@ namespace RepositoryLayer.Service
                 throw;
             }
 
-
-
-
         }
+
+
+
+        public string Image(IFormFile image, long noteID, long userID)
+        {
+            try
+            {
+                var result = fundooContext.NotesTable.Where(x => x.UserId == userID && x.noteID == noteID).FirstOrDefault();
+                if (result != null)
+                {
+                    Account cldaccount = new Account(
+                        cloudinaryEntity["CloudinarySettings:CloudName"],
+                        cloudinaryEntity["CloudinarySettings:ApiKey"],
+                        cloudinaryEntity["CloudinarySettings:ApiSecret"]
+                        );
+                    Cloudinary cloudinary = new Cloudinary(cldaccount);
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(image.FileName, image.OpenReadStream()),
+                    };
+                    var uploadResult = cloudinary.Upload(uploadParams);
+                    string imagePath = uploadResult.Url.ToString();
+                    result.Image = imagePath;
+                    fundooContext.SaveChanges();
+                    return "Image uploaded successfully";
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 
