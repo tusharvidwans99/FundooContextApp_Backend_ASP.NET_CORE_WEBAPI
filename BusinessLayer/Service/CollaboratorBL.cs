@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
+using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,51 @@ namespace BusinessLayer.Service
                 throw;
             }
 
+        }
+
+        public void DeleteCollab(CollaboratorEntity collab)
+        {
+            try
+            {
+
+                icollaboratorRL.DeleteCollab(collab);
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public CollaboratorEntity GetCollabWithId(long collabId)
+        {
+
+            try
+            {
+               return icollaboratorRL.GetCollabWithId(collabId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+
+        public IEnumerable<CollaboratorEntity> GetCollab(long userID)
+        {
+            try
+            {
+                return icollaboratorRL.GetCollab(userID);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

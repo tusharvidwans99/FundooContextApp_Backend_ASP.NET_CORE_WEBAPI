@@ -25,23 +25,94 @@ namespace RepositoryLayer.Service
             try
             {
                 var validNotesAndUser = this.fundooContext.UserTable.Where(e => e.UserId == jwtUserId);
-                CollaboratorEntity collaborate = new CollaboratorEntity();
 
-                collaborate.noteID = notesId;
-                collaborate.UserId = jwtUserId;
-                collaborate.CollaboratedEmail = model.Collaborated_Email;
+                if (validNotesAndUser != null)
+                {
+                    CollaboratorEntity collaborate = new CollaboratorEntity();
+
+                    collaborate.noteID = notesId;
+                    collaborate.UserId = jwtUserId;
+                    collaborate.CollaboratedEmail = model.Collaborated_Email;
+
+                    fundooContext.Add(collaborate);
+                    fundooContext.SaveChanges();
+
+                    CollabResponseModel responseModel = new CollabResponseModel();
+
+                    responseModel.CollaboratorID = collaborate.CollaboratorID;
+                    responseModel.noteID = collaborate.noteID;
+                    responseModel.UserId = collaborate.UserId;
+                    responseModel.CollaboratedEmail = collaborate.CollaboratedEmail;
+
+                    return responseModel;
+                }
+                else
+                {
+                    return null;
+                }
+
                 
-                fundooContext.Add(collaborate);
-                fundooContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-                CollabResponseModel responseModel = new CollabResponseModel();
 
-                responseModel.CollaboratorID = collaborate.CollaboratorID;
-                responseModel.noteID = collaborate.noteID;
-                responseModel.UserId = collaborate.UserId;
-                responseModel.CollaboratedEmail = collaborate.CollaboratedEmail;
+
+        public void DeleteCollab(CollaboratorEntity collab)
+        {
+            try
+            {
+
+                this.fundooContext.CollaboratorTable.Remove(collab);
+                this.fundooContext.SaveChanges();
                 
-                return responseModel;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+
+        public CollaboratorEntity GetCollabWithId(long collabId)
+        {
+            try
+            {
+                var result = this.fundooContext.CollaboratorTable.FirstOrDefault(e => e.CollaboratorID == collabId);
+
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
+        public IEnumerable<CollaboratorEntity> GetCollab(long userID)
+        {
+            try
+            {
+                var result = fundooContext.CollaboratorTable.Where(x => x.UserId == userID);
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {
