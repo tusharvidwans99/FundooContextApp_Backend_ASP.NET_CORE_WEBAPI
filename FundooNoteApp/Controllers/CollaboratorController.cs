@@ -3,9 +3,16 @@ using CommonLayer.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
+using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FundooNoteApp.Controllers
 {
@@ -16,10 +23,17 @@ namespace FundooNoteApp.Controllers
     {
 
         private readonly ICollaboratorBL icollaboratorBL;
+        private readonly IMemoryCache memoryCache;
+        private readonly IDistributedCache distributedCache;
 
-        public CollaboratorController(ICollaboratorBL icollaboratorBL)
+        private readonly FundooContext fundooContext;
+
+        public CollaboratorController(ICollaboratorBL icollaboratorBL, IMemoryCache memoryCache, IDistributedCache distributedCache, FundooContext fundooContext)
         {
             this.icollaboratorBL = icollaboratorBL;
+            this.memoryCache = memoryCache;
+            this.distributedCache = distributedCache;
+            this.fundooContext = fundooContext;
         }
 
 
@@ -81,6 +95,35 @@ namespace FundooNoteApp.Controllers
             }
         }
 
+
+        [HttpGet("redis")]
+        public async Task<IActionResult> GetAllCustomersUsingRedisCache()
+        {
+            long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
+
+            var cacheKey = "CollabList";
+            string serializedCollabList;
+            var CollabList = new List<CollaboratorEntity>();
+            var redisNotesList = await distributedCache.GetAsync(cacheKey);
+            if (redisNotesList != null)
+            {
+                serializedCollabList = Encoding.UTF8.GetString(redisNotesList);
+                CollabList = JsonConvert.DeserializeObject<List<CollaboratorEntity>>(serializedCollabList);
+            }
+            else
+            {
+
+
+                CollabList = fundooContext.CollaboratorTable.ToList();
+                serializedCollabList = JsonConvert.SerializeObject(CollabList);
+                redisNotesList = Encoding.UTF8.GetBytes(serializedCollabList);
+                var options = new DistributedCacheEntryOptions()
+                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                await distributedCache.SetAsync(cacheKey, redisNotesList, options);
+            }
+            return Ok(CollabList);
+        }
 
     }
 }

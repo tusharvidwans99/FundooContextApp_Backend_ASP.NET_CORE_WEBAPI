@@ -3,9 +3,16 @@ using CommonLayer.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
+using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FundooNoteApp.Controllers
 {
@@ -16,10 +23,17 @@ namespace FundooNoteApp.Controllers
     {
 
         ILableBL ilableBL;
+        private readonly IMemoryCache memoryCache;
+        private readonly IDistributedCache distributedCache;
 
-        public LabelController(ILableBL ilableBL)
+        private readonly FundooContext fundooContext;
+
+        public LabelController(ILableBL ilableBL, IMemoryCache memoryCache, IDistributedCache distributedCache, FundooContext fundooContext)
         {
             this.ilableBL = ilableBL;
+            this.memoryCache = memoryCache;
+            this.distributedCache = distributedCache;
+            this.fundooContext = fundooContext;
         }
 
 
@@ -199,6 +213,34 @@ namespace FundooNoteApp.Controllers
         }
 
 
+        [HttpGet("redis")]
+        public async Task<IActionResult> GetAllCustomersUsingRedisCache()
+        {
+            long userID = Convert.ToInt32(User.Claims.FirstOrDefault(user => user.Type == "userID").Value);
+
+            var cacheKey = "LableList";
+            string serializedLableList;
+            var LableList = new List<LableEntity>();
+            var redisLableList = await distributedCache.GetAsync(cacheKey);
+            if (redisLableList != null)
+            {
+                serializedLableList = Encoding.UTF8.GetString(redisLableList);
+                LableList = JsonConvert.DeserializeObject<List<LableEntity>>(serializedLableList);
+            }
+            else
+            {
+
+
+                LableList = fundooContext.lableTable.ToList();
+                serializedLableList = JsonConvert.SerializeObject(LableList);
+                redisLableList = Encoding.UTF8.GetBytes(serializedLableList);
+                var options = new DistributedCacheEntryOptions()
+                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                await distributedCache.SetAsync(cacheKey, redisLableList, options);
+            }
+            return Ok(LableList);
+        }
 
     }
 }
