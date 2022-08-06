@@ -64,9 +64,9 @@ namespace RepositoryLayer.Service
             try
             {
                
-                var LoginResult = fundooContext.UserTable.Where(user => user.Email == userLoginModel.Email && user.Password == ConvertToEncrypt(userLoginModel.Password)).FirstOrDefault();
+                var LoginResult = fundooContext.UserTable.Where(user => user.Email == userLoginModel.Email).FirstOrDefault();
 
-                if (LoginResult != null)
+                if (LoginResult != null && ConvertToDecrypt(LoginResult.Password) == userLoginModel.Password)
                 {
                     var token = GenerateSecurityToken(LoginResult.Email, LoginResult.UserId);
                     return token;
