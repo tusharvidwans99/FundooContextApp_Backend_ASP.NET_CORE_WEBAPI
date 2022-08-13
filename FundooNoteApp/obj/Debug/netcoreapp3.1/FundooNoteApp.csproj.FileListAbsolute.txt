@@ -65,3 +65,7 @@ C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\StackExchange.Redis.dll
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\NLog.config
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\NLog.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+C:\Users\tusha\source\repos\FundooNoteApp\FundooNoteApp\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll

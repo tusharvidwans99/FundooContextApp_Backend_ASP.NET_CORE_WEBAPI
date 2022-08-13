@@ -36,6 +36,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.0",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "3.1.0",
+          "NLog.Web.AspNetCore": "5.1.0",
           "Swashbuckle.AspNetCore": "6.4.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
@@ -721,6 +722,47 @@
         },
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "NLog/5.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/NLog.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1.1159"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/NLog.dll": {}
+        }
+      },
+      "NLog.Extensions.Logging/5.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "3.1.0",
+          "Microsoft.Extensions.Logging": "3.1.0",
+          "NLog": "5.0.1"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/NLog.Extensions.Logging.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1.172"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/NLog.Extensions.Logging.dll": {}
+        }
+      },
+      "NLog.Web.AspNetCore/5.1.0": {
+        "dependencies": {
+          "NLog.Extensions.Logging": "5.0.1"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/NLog.Web.AspNetCore.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.1.455.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/NLog.Web.AspNetCore.dll": {}
         }
       },
       "Pipelines.Sockets.Unofficial/2.0.17": {
@@ -3448,6 +3490,27 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "NLog/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lNErNEPzYiZtUAlgvXpSRxUIPLIDHTLA8pKxkDDV//DCqzwp98FitFemOEmJjIuPvk3GC3ytrQMXsy7P9RTPIw==",
+      "path": "nlog/5.0.1",
+      "hashPath": "nlog.5.0.1.nupkg.sha512"
+    },
+    "NLog.Extensions.Logging/5.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZPbnH7RCxdYLmmPgw4DBpqjYQJtfPbyf7/ucmFc5wbwHmUUo4eqbD7ShOYwlgwEY8u7VFU7dT3cpdHKIUjO10Q==",
+      "path": "nlog.extensions.logging/5.0.1",
+      "hashPath": "nlog.extensions.logging.5.0.1.nupkg.sha512"
+    },
+    "NLog.Web.AspNetCore/5.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QQhUjoVXtf83Z48rLEG6djDkc/nIREOssPdBEkqKJgiXzdJceH16S3i9jejz9pl0mL/1lVYSJyFbacCRqnTXew==",
+      "path": "nlog.web.aspnetcore/5.1.0",
+      "hashPath": "nlog.web.aspnetcore.5.1.0.nupkg.sha512"
     },
     "Pipelines.Sockets.Unofficial/2.0.17": {
       "type": "package",

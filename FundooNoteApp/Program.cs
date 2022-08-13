@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NLog.Web;
+using System.IO;
 
 namespace FundooNoteApp
 {
@@ -13,6 +15,11 @@ namespace FundooNoteApp
     {
         public static void Main(string[] args)
         {
+
+            var logPath = Path.Combine(Directory.GetCurrentDirectory(), "FundooNoteLogs");
+            NLog.GlobalDiagnosticsContext.Set("FundooNoteLogDirectory", logPath);
+
+
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -21,6 +28,10 @@ namespace FundooNoteApp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).ConfigureLogging(opt =>
+                {
+                    opt.ClearProviders();
+                    opt.SetMinimumLevel(LogLevel.Trace);
+                }).UseNLog();
     }
 }
